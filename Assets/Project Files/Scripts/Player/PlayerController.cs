@@ -12,14 +12,13 @@ public class PlayerController : MonoBehaviour, IMoveable
 
     [Space(2), Header("Settings")]
     [SerializeField] private float _moveSpeed = 4f;
-    [SerializeField] private float _jumpForce = 5f;
+    [SerializeField] private float _jumpForce = 9f;
     [SerializeField] private float _horizontalTurnSensitivity = 4f;
     [SerializeField] private float _verticalTurnSensitivity = 2f;
     [SerializeField] private float _gravityFactor = 2f;
     [SerializeField] private bool _isCursorHidden;
 
     private CharacterController _characterController;
-    private Transform _transform;
     private Camera _camera;
 
     private Vector3 _direction;
@@ -27,10 +26,12 @@ public class PlayerController : MonoBehaviour, IMoveable
     private Vector3 _velocity;
     private float _cameraXAngle;
 
+    public Transform Transform { get; private set; }
+
     private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
-        _transform = transform;
+        Transform = transform;
         _camera = Camera.main;
 
         if (_isCursorHidden)
@@ -73,7 +74,7 @@ public class PlayerController : MonoBehaviour, IMoveable
         float mouseX = _mouseLookDelta.x * _horizontalTurnSensitivity;
         float mouseY = _mouseLookDelta.y * _verticalTurnSensitivity;
 
-        _transform.Rotate(mouseX * Vector3.up);
+        Transform.Rotate(mouseX * Vector3.up);
 
         _cameraXAngle -= mouseY;
         _cameraXAngle = Mathf.Clamp(_cameraXAngle, MinLookAngle, MaxLookAngle);
