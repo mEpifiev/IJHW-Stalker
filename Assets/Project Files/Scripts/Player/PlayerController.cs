@@ -7,10 +7,8 @@ public class PlayerController : MonoBehaviour, IMoveable
     private const float MaxLookAngle = 90f;
     private const float MinLookAngle = -90f;
 
-    [Header("Dependencies")]
     [SerializeField] private InputReader _inputReader;
 
-    [Space(2), Header("Settings")]
     [SerializeField] private float _moveSpeed = 4f;
     [SerializeField] private float _jumpForce = 9f;
     [SerializeField] private float _horizontalTurnSensitivity = 4f;

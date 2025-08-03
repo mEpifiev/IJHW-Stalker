@@ -3,7 +3,6 @@ using UnityEngine;
 [RequireComponent(typeof(CapsuleCollider))]
 public class StepDetector : MonoBehaviour
 {
-    [Header("Settings")]
     [SerializeField] private float _rayDistance = 0.5f;
     [SerializeField] private LayerMask _layerMask;
 

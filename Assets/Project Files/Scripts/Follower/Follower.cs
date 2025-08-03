@@ -4,11 +4,9 @@ using UnityEngine;
 [RequireComponent(typeof(CapsuleCollider))]
 public class Follower : MonoBehaviour
 {
-    [Header("Dependencies")]
     [SerializeField] private GroundDetector _groundDetector;
     [SerializeField] private StepDetector _stepDetector;
 
-    [Header("Settings")]
     [SerializeField] private float _moveSpeed = 3f;
     [SerializeField] private float _rotationSpeed = 3f;
     [SerializeField] private float _stoppingDistance = 2f;
