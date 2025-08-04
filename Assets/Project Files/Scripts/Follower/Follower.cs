@@ -68,7 +68,7 @@ public class Follower : MonoBehaviour
             return;
 
         Quaternion targetRotation = Quaternion.LookRotation(_direction, Vector3.up);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.fixedDeltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
     }
 
     private void ApplyGravity()
