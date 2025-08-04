@@ -13,19 +13,23 @@ public class Follower : MonoBehaviour
     [SerializeField] private float _stepUpForce = 2.5f;
 
     private Rigidbody _rigidbody;
-    private CapsuleCollider _capsuleCollider;
+    private Vector3 _direction;
 
-    private IMoveable _target;
+    private ITarget _target;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _capsuleCollider = GetComponent<CapsuleCollider>();
     }
 
-    public void SetTarget(IMoveable moveable)
+    public void SetTarget(ITarget moveable)
     {
         _target = moveable;
+    }
+
+    private void Update()
+    {
+        RotateTo();
     }
 
     private void FixedUpdate()
@@ -48,24 +52,22 @@ public class Follower : MonoBehaviour
             return;
         }
 
-        Vector3 direction = toTarget.normalized;
+        _direction = toTarget.normalized;
 
-        RotateTo(direction);
-
-        if (_stepDetector.IsStep(direction))
+        if (_stepDetector.IsStep(_direction))
             _rigidbody.AddForce(Vector3.up * _stepUpForce, ForceMode.VelocityChange);
 
-        _rigidbody.velocity = direction * _moveSpeed;
+        _rigidbody.velocity = _direction * _moveSpeed;
     }
 
-    private void RotateTo(Vector3 direction)
+    private void RotateTo()
     {
-        const float minRotationThreshold = 0.01f;
+        const float MinRotationThreshold = 0.01f;
 
-        if (direction.sqrMagnitude < minRotationThreshold)
+        if (_direction.sqrMagnitude < MinRotationThreshold)
             return;
 
-        Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+        Quaternion targetRotation = Quaternion.LookRotation(_direction, Vector3.up);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.fixedDeltaTime);
     }
 

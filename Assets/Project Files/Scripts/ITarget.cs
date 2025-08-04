@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface IMoveable
+public interface ITarget
 {
     Transform Transform { get; }
 }

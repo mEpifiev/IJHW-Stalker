@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerController : MonoBehaviour, IMoveable
+public class PlayerCharacter : MonoBehaviour, ITarget
 {
     private const float GroundStickForce = -1f;
     private const float MaxLookAngle = 90f;
